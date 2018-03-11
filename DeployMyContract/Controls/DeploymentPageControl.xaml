@@ -1,0 +1,122 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:DeployMyContract.Wpf.Controls"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:behaviors="clr-namespace:DeployMyContract.Wpf.Behaviors"
+                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                    xmlns:converters="clr-namespace:DeployMyContract.Wpf.Converters"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:data="clr-namespace:DeployMyContract.Core.Data;assembly=DeployMyContract.Core"
+                    xmlns:logic="clr-namespace:DeployMyContract.Wpf.Logic">
+    
+    <Style TargetType="local:DeploymentPageControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:DeploymentPageControl">
+                    <Grid Style="{StaticResource PageContainerGrid}">
+                        <Grid.Resources>
+                            <converters:UnixTimestampConverter x:Key="UnixTimestampConverter" />
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.4*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Style="{StaticResource HeaderTextBlock}"
+                                   Text="Deploy the contract" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Select your main contract:" />
+                        <ComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                  ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.CompiledContractInfos, Mode=OneWay}"
+                                  SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.SelectedContract, Mode=TwoWay}"
+                                  DisplayMemberPath="Name" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Wallet key file:" />
+                        <local:FileSelector Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Filter="JSON key files (*.json)|*.json|All files (*.*)|*.*"
+                                            FileName="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=KeyPath, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Bottom"
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Ethereum node URL:" />
+                        <TextBox Grid.Row="6" Grid.Column="0"
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.EthereumNodeUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Row="7" Grid.Column="0"
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Wallet key file password:" />
+                        <PasswordBox Grid.Row="8" Grid.Column="0">
+                            <i:Interaction.Behaviors>
+                                <behaviors:PasswordBoxBehavior Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=KeyPassword, Mode=TwoWay}" />
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                        <TextBlock Grid.Row="9" Grid.Column="0"
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Gas limit for deployment transaction:" />
+                        <TextBox Grid.Row="10" Grid.Column="0" VerticalAlignment="Top"
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GasLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Row="5" Grid.Column="1"
+                                   Style="{StaticResource MarginedTextBlock}" Margin="10 4 4 4"
+                                   Text="Constructor parameters (array elements should be divided by ';'):" />
+                        <DataGrid Grid.Row="6" Grid.Column="1" Grid.RowSpan="5"
+                                  Style="{StaticResource ConstructorArgumentsDataGrid}"
+                                  ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.SelectedContract.ConstructorArguments, Mode=OneWay}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Header="Argument"
+                                                    Binding="{Binding Name, Mode=OneWay}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Type"
+                                                    Binding="{Binding Type, Mode=OneWay}" />
+                                <DataGridTextColumn Header="Value" Width="*"
+                                                    Binding="{Binding Value, Mode=TwoWay}" />
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplateSelector>
+                                        <logic:ArgumentActionCellTempleSelector>
+                                            <logic:ArgumentActionCellTempleSelector.IntTemplate>
+                                                <DataTemplate DataType="data:ConstructorArgument">
+                                                    <Grid>
+                                                        <Popup Name="CalendarPopup" PopupAnimation="Fade" AllowsTransparency="True" Placement="Mouse" StaysOpen="False">
+                                                            <Calendar SelectedDate="{Binding Value, Converter={StaticResource UnixTimestampConverter}, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="SelectedDatesChanged">
+                                                                        <ei:ChangePropertyAction TargetName="CalendarPopup" PropertyName="IsOpen" Value="False" />
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                            </Calendar>
+                                                        </Popup>
+                                                        <Button Margin="2" ToolTip="Insert timestamp for date">
+                                                            <Image Stretch="None" 
+                                                                   Source="../Resources/calendar-icon.png" />
+                                                            <i:Interaction.Triggers>
+                                                                <i:EventTrigger EventName="Click">
+                                                                    <ei:ChangePropertyAction TargetName="CalendarPopup" PropertyName="IsOpen" Value="True" />
+                                                                </i:EventTrigger>
+                                                            </i:Interaction.Triggers>
+                                                        </Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </logic:ArgumentActionCellTempleSelector.IntTemplate>
+                                        </logic:ArgumentActionCellTempleSelector>
+                                    </DataGridTemplateColumn.CellTemplateSelector>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

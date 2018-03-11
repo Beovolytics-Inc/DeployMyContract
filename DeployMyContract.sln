@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeployMyContract.Wpf", "DeployMyContract\DeployMyContract.Wpf.csproj", "{4746297D-105F-41AE-8528-0694BF23C2ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeployMyContract.Core", "DeployMyContract.Core\DeployMyContract.Core.csproj", "{2F595A63-2CC9-4292-807D-58AC18BAB988}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4746297D-105F-41AE-8528-0694BF23C2ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4746297D-105F-41AE-8528-0694BF23C2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4746297D-105F-41AE-8528-0694BF23C2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4746297D-105F-41AE-8528-0694BF23C2ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F595A63-2CC9-4292-807D-58AC18BAB988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F595A63-2CC9-4292-807D-58AC18BAB988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F595A63-2CC9-4292-807D-58AC18BAB988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F595A63-2CC9-4292-807D-58AC18BAB988}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2ECA123E-BD70-402A-84BF-CED8C84F580D}
+	EndGlobalSection
+EndGlobal

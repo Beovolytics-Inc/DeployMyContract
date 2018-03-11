@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:DeployMyContract.Wpf.Controls">
+
+    <Style TargetType="local:CompilerWarningPageControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:CompilerWarningPageControl">
+                    <Grid Style="{StaticResource PageContainerGrid}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" 
+                                   Style="{StaticResource WarningHeaderTextBlock}"
+                                   Text="Compiler warnings" />
+                        <TextBlock Grid.Row="1" 
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Please check the following compiler warnings and press 'Next' if they can be ignored:" />
+                        <TextBox Grid.Row="2"
+                                 Style="{StaticResource ErrorTextBox}"
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.CompilerWarnings, Mode=OneWay}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

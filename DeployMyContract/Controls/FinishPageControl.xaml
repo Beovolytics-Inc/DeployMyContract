@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:DeployMyContract.Wpf.Controls"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:behaviors="clr-namespace:DeployMyContract.Wpf.Behaviors">
+    
+    <Style TargetType="local:FinishPageControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:FinishPageControl">
+                    <Grid Style="{StaticResource PageContainerGrid}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" 
+                                   Style="{StaticResource SuccessHeaderTextBlock}"
+                                   Text="Verification successful!" />
+                        <TextBlock Grid.Row="1"
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Congratulations! Your contract was deployed and verified successfully." />
+                        <TextBlock Grid.Row="2"
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Your contract address page:" />
+                        <TextBlock Grid.Row="3"
+                                   Style="{StaticResource MarginedTextBlock}">
+                            <Hyperlink NavigateUri="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.ContractUri, Mode=OneWay}">
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.ContractUri, Mode=OneWay}" />
+                                <i:Interaction.Behaviors>
+                                    <behaviors:ExternalHyperlinkBehavior />
+                                </i:Interaction.Behaviors>
+                            </Hyperlink>
+                        </TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

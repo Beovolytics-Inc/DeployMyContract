@@ -1,0 +1,22 @@
+﻿<Application x:Class="DeployMyContract.Wpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Styles.xaml" />
+                 <ResourceDictionary Source="Themes/VectorGraphics.xaml" />
+
+                <ResourceDictionary Source="Controls/WelcomePageControl.xaml" />
+                <ResourceDictionary Source="Controls/FileSelector.xaml" />
+                <ResourceDictionary Source="Controls/ContractOptionsPageControl.xaml" />
+                <ResourceDictionary Source="Controls/ErrorPageControl.xaml" />
+                <ResourceDictionary Source="Controls/DeploymentPageControl.xaml" />
+                <ResourceDictionary Source="Controls/VerificationPageControl.xaml" />
+                 <ResourceDictionary Source="Controls/FinishPageControl.xaml" />
+                 <ResourceDictionary Source="Controls/CompilerWarningPageControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+         </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:DeployMyContract.Wpf.Controls">
+    
+    <Style TargetType="local:ContractOptionsPageControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ContractOptionsPageControl">
+                    <Grid Style="{StaticResource PageContainerGrid}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" 
+                                   Style="{StaticResource HeaderTextBlock}"
+                                   Text="Select compiler and contract to deploy" />
+                        <TextBlock Grid.Row="1" 
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Select Ethereum network to verify the contract:" />
+                        <ComboBox Grid.Row="2"
+                                  ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=EthereumNetworkInfos, Mode=OneWay}"
+                                  SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.SelectedEthereum, Mode=TwoWay}"
+                                  DisplayMemberPath="Name" />
+                        <TextBlock Grid.Row="3" 
+                                   Style="{StaticResource CommentTextBlock}">
+                            <Run Text="Verification fee for this network:" />
+                            <Run FontWeight="Bold" 
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.SelectedEthereum.Fee, StringFormat='{}{0:N4} ETH', Mode=OneWay}" />
+                        </TextBlock>
+                        <TextBlock Grid.Row="4" 
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Specify the Solidity compiler path:"/>
+                        <local:FileSelector Grid.Row="5"
+                                            Filter="Executable files (*.exe)|*.exe"
+                                            FileName="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.CompilerPath, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="6" 
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="Select your contract source file:"/>
+                        <local:FileSelector Grid.Row="7"
+                                            Filter="Solidity source files (*.sol)|*.sol|All files (*.*)|*.*"
+                                            FileName="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ContractSourcePath, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="8" 
+                                   Style="{StaticResource MarginedTextBlock}"
+                                   Text="or paste your contract source here:" />
+                        <TextBox Grid.Row="9" Style="{StaticResource MonospaceTextBox}"
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PageContext.ContractSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

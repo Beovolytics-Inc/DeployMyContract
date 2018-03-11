@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Viewbox Height="120" Stretch="Uniform" x:Key="EthereumLogo">
+        <Canvas Width="256" Height="417">
+            <Path Fill="#FF343434">
+                <Path.Data>
+                    <PathGeometry Figures="M127.961 0l-2.795 9.5v275.668l2.795 2.79 127.962-75.638z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+            <Path Fill="#FF8C8C8C">
+                <Path.Data>
+                    <PathGeometry Figures="M127.962 0L0 212.32l127.962 75.639V154.158z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+            <Path Fill="#FF3C3C3B">
+                <Path.Data>
+                    <PathGeometry Figures="M127.961 312.187l-1.575 1.92v98.199l1.575 4.6L256 236.587z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+            <Path Fill="#FF8C8C8C">
+                <Path.Data>
+                    <PathGeometry Figures="M127.962 416.905v-104.72L0 236.585z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+            <Path Fill="#FF141414">
+                <Path.Data>
+                    <PathGeometry Figures="M127.961 287.958l127.96-75.637-127.96-58.162z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+            <Path Fill="#FF393939">
+                <Path.Data>
+                    <PathGeometry Figures="M0 212.32l127.96 75.638v-133.8z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
+
+</ResourceDictionary>
